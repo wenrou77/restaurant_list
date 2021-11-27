@@ -1,10 +1,9 @@
-# Project Title
-
-My restaurant list
+# 我的餐廳清單
 
 ## Description
 
-This is a website created by node.js Express. You can find restaurants by name or category.
+This is a website created by node.js Express. 
+You can find restaurants by name or category.
 
 ### Executing program
 
@@ -15,7 +14,7 @@ git clone https://github.com/wenrou77/restaurant_list.git
 
 2. Initialization
 ```
-npm install  //安裝套件
+npm install  //install packages
 ```
 
 3. Execute
