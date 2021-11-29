@@ -27,19 +27,18 @@ app.get('/search', (req, res) => {
   ///Version 2. 能夠同時搜尋餐廳名字和類別（較寬鬆的篩選，只要其中一個條件符合就渲染出來）
   //get each keyword
   const keywords = req.query.keyword.toLowerCase().trim().split(' ')
-  //open new array
-  let restaurantChosen = []
   //double loop to find the chosen restaurant
   const restaurants = restaurantList.results.filter(restaurant => {
+    let matchKeyword = false
     keywords.forEach(item => {
-      if (restaurant.name.toLowerCase().includes(item) || restaurant.category.toLowerCase().includes(item)) {
-        restaurantChosen.push(restaurant)
+      if (restaurant.name.toLowerCase().includes(item) ||
+        restaurant.category.toLowerCase().includes(item)) {
+        matchKeyword = matchKeyword || true
       }
     })
+    return matchKeyword
   })
-  //去除陣列中的重複項
-  restaurantChosen = [...new Set(restaurantChosen)]
-  res.render('index', { restaurant: restaurantChosen, keyword: keywords })
+  res.render('index', { restaurant: restaurants, keyword: keywords })
 })
 
 app.listen(port, () => {
