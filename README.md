@@ -23,12 +23,12 @@ npm install  //install packages
 ```
 
 3. Execute
-To add data seeders
+-To add data seeders
 ```
 npm run seed
 ```
 
-To run on the index page
+-To run on the index page
 ```
 npm run dev
 ```
