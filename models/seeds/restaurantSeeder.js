@@ -14,5 +14,3 @@ db.once('open', () => {
   }
   console.log('mongodb connected!')
 })
-
-//console.log(restaurantList.results[0].name)
