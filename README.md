@@ -3,7 +3,12 @@
 ## Description
 
 This is a website created by node.js Express. 
-You can find restaurants by name or category.
+- Search restaurants by name or category.
+- Add a restaurant
+- Check details of a restaurant
+- Browse all restaurants
+- Modify a restaurant information
+- Delete a restaurant from list
 
 ### Executing program
 
@@ -18,6 +23,12 @@ npm install  //install packages
 ```
 
 3. Execute
+To add data seeders
+```
+npm run seed
+```
+
+To run on the index page
 ```
 npm run dev
 ```

@@ -38,7 +38,9 @@
             <div class="d-flex justify-content-end">
               <a href="/restaurants/{{this._id}}/edit"><button class="btn btn-link">Edit</button></a>
               <a href="/restaurants/{{this._id}}"><button class="btn btn-link">Detail</button></a>
-              <button class="btn btn-danger">Delete</button>
+              <form action="./restaurants/{{ this._id }}/delete" method="POST" style="display: inline;">
+                <button class="btn btn-danger" type="submit">delete</button>
+              </form>
             </div>
           </div>
         </a>
@@ -48,7 +50,7 @@
   </div>
 </div>
 
-<div class="d-flex flex-column align-items-center">
+<div class="d-flex flex-column align-items-center mb-4">
   <h4 style="color:dimgray">Didn't find your favorite restaurant?</h4>
   <a href="./restaurants/new">
     <button type="button" class="btn btn-outline-secondary">Create a new one</button>

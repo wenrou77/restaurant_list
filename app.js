@@ -59,12 +59,12 @@ app.get('/search', (req, res) => {
 
 // 新增一家餐廳(未完成，畫面一直轉)
 app.get('/restaurants/new', (req, res) => {
+  console.log("new enter")
   return res.render('new')
 })
 
 app.post('/restaurants', (req, res) => {
-  const name = req.body.name
-  return Restaurant.create({ name })
+  return Restaurant.create(req.body)
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
@@ -90,6 +90,13 @@ app.post('/restaurants/:id/edit', (req, res) => {
 })
 
 //刪除一家餐廳
+app.post('/restaurants/:id/delete', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .then(restaurant => restaurant.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
 
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`)
