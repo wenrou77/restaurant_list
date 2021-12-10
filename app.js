@@ -2,6 +2,7 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 const Restaurant = require('./models/restaurant')
 const app = express()
 const port = process.env.PORT || 3000
@@ -21,6 +22,7 @@ app.use(express.static('public'))
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 
 // 瀏覽全部所有餐廳
 app.get('/', (req, res) => {
@@ -40,7 +42,7 @@ app.get('/restaurants/:restaurant_id', (req, res) => {
 })
 
 app.get('/search', (req, res) => {
-  ///能夠同時搜尋餐廳名字和類別（較寬鬆的篩選，只要其中一個條件符合就渲染出來）
+  ///能夠同時搜尋餐廳名字和類別（只要其中一個條件符合就渲染出來）
   //get each keyword
   const keywords = req.query.keyword.toLowerCase().trim().split(' ')
   //double loop to find the chosen restaurant
@@ -77,7 +79,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
     .then(restaurant => res.render('edit', { restaurant }))
     .catch(error => console.log(error))
 })
-app.post('/restaurants/:id/edit', (req, res) => {
+app.put('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
   const name = req.body.name
   return Restaurant.findById(id)
@@ -90,7 +92,7 @@ app.post('/restaurants/:id/edit', (req, res) => {
 })
 
 //刪除一家餐廳
-app.post('/restaurants/:id/delete', (req, res) => {
+app.delete('/restaurants/:id/delete', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then(restaurant => restaurant.remove())
