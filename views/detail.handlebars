@@ -1,5 +1,9 @@
 <h1 class="mb-1 restaurant-show-title">{{restaurant.name}}</h1>
 <div class="container">
+  <div class="d-flex justify-content-end col-12 col-md-10 mx-auto">
+    <a class="mb-4 mx-2" href="/restaurants/{{restaurant._id}}/edit">編輯</a>
+    <a class="mb-4 mx-2" href="/">回首頁</a>
+  </div>
   <div class="row">
     <div class="col-12 col-md-10 mx-auto">
       <p class="mb-1">
@@ -33,9 +37,8 @@
         {{restaurant.description}}
       </p>
 
-      <img class="rounded mx-auto d-block mb-4 w-100" src="{{restaurant.image}}" alt="{{restaurant.name}}"
-        style="max-width: 600px;">
-      <a class="row justify-content-center mb-4" href="/">回首頁</a>
+      <img class="rounded mx-auto d-block mb-4 w-70" src="{{restaurant.image}}"
+        onerror="this.src='https://cdn-icons-png.flaticon.com/512/3170/3170733.png'" alt="{{restaurant.name}}">
     </div>
   </div>
 </div>

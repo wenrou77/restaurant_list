@@ -20,13 +20,19 @@ router.get('/:id/edit', (req, res) => {
     .then(restaurant => res.render('edit', { restaurant }))
     .catch(error => console.log(error))
 })
-///II. 儲存編輯資料
+///II. update資料
 router.put('/:id', (req, res) => {
   const id = req.params.id
-  const name = req.body.name
+  const request = req.body
   return Restaurant.findById(id)
     .then(restaurant => {
-      restaurant.name = name
+      restaurant.name = request.name
+      restaurant.category = request.category
+      restaurant.location = request.location
+      restaurant.phone = request.phone
+      restaurant.description = request.description
+      restaurant.image = request.image
+      restaurant.google_map = request.google_map
       return restaurant.save()
     })
     .then(() => res.redirect(`/restaurants/${id}`))
