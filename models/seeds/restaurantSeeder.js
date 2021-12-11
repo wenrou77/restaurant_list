@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const Restaurant = require('../restaurant')
 const restaurantList = require('../../restaurant.json')
+restaurantNum = restaurantList.results.length
 
 const db = require('../../config/mongoose')
 db.once('open', () => {

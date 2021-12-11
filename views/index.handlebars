@@ -5,10 +5,20 @@
       <form action="/search">
         <h4 class="mb-2">尋找餐廳：</h4>
         <div class="input-group">
-          <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳 or 分類（若輸入多個關鍵字，請以空格分隔）"
+          <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳 or 分類"
             aria-label="Restaurant Name..." value="{{keyword}}" aria-describedby="search-button">
           <div class="input-group-append">
-            <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+            <a href="/restaurants/search"><button class="btn btn-major" type="submit" id="search-button"><i
+                  class="fas fa-search"></i></button></a>
+          </div>
+          <div class="mb-3 mx-2">
+            <input list="title-sort" name="sorting" class="form-control" style="width:150px" placeholder="sort by...">
+            <datalist id="title-sort">
+              <option value="a_to_z">A -> Z</option>
+              <option value="z_to_a">Z -> A</option>
+              <option value="category">類別</option>
+              <option value="location">地區</option>
+            </datalist>
           </div>
         </div>
       </form>
@@ -24,7 +34,9 @@
         {{#each restaurant}}
         <a class="text-secondary">
           <div class="card mb-3">
-            <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
+            <img class="card-img-top" src="{{this.image}}"
+              onerror="javascript:this.src='https://cdn-icons-png.flaticon.com/512/3170/3170733.png'"
+              alt="{{this.name}}">
             <div class="card-body p-3">
               <h6 class="card-title mb-1">{{this.name}}</h6>
               <div class="restaurant-category mb-1">
@@ -48,11 +60,4 @@
       </div>
     </div>
   </div>
-</div>
-
-<div class="d-flex flex-column align-items-center mb-4">
-  <h4 style="color:dimgray">Didn't find your favorite restaurant?</h4>
-  <a href="./restaurants/new">
-    <button type="button" class="btn btn-outline-secondary">Create a new one</button>
-  </a>
 </div>
