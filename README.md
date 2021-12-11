@@ -1,4 +1,5 @@
 # 我的餐廳清單
+![Index page about Restaurant List](./public/image/screenshot.png)
 
 ## Description
 
