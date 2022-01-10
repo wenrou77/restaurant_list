@@ -35,15 +35,15 @@ router.post('/', (req, res) => {
 router.get('/search', (req, res) => {
   const keyword = req.query.keyword.toLowerCase().trim()
   const sortBy = req.query.sorting
-  var sortingObj = new Object()
-  if (sortBy == "a_to_z") sortingObj.name_en = 'asc'
-  else if (sortBy == "z_to_a") sortingObj.name_en = 'desc'
-  else if (sortBy == "category") sortingObj.category = 'asc'
-  else if (sortBy == "location") sortingObj.location = 'asc'
+  // var sortingObj = new Object()
+  // if (sortBy === 'a_to_z') let sortingObj.name_en = 'asc'
+  // else if (sortBy === 'z_to_a') let sortingObj.name_en = 'desc'
+  // else if (sortBy === 'category') let sortingObj.category = 'asc'
+  // else if (sortBy === 'location') let sortingObj.location = 'asc'
 
   Restaurant.find()
     .lean()
-    .sort(sortingObj)
+    .sort({ name_en: 'asc' })
     .then(restaurant => {
       const filteredRestaurants = restaurant.filter(
         data => data.name.toLowerCase().includes(keyword)

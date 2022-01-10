@@ -8,12 +8,11 @@ const app = express()
 const port = process.env.PORT || 3000
 
 app.use(express.static('public'))
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
-app.set('view engine', 'handlebars')
+app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
+app.set('view engine', 'hbs')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use(routes)
-
 
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`)
