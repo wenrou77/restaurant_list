@@ -7,29 +7,44 @@ const restaurantList = require('../../restaurant.json')
 restaurantNum = restaurantList.results.length
 const User = require('../user')
 const db = require('../../config/mongoose')
-const SEED_USER = {
-  name: 'root',
-  email: 'root@example.com',
-  password: '12345678'
-}
+const SEED_USERS = [
+  {
+    email: 'user1@example.com',
+    password: '12345678'
+  },
+  {
+    email: 'user2@example.com',
+    password: '12345678'
+  }
+]
+
 db.once('open', () => {
-  bcrypt
-    .genSalt(10)
-    .then(salt => bcrypt.hash(SEED_USER.password, salt))
-    .then(hash => User.create({
-      name: SEED_USER.name,
-      email: SEED_USER.email,
-      password: hash
-    }))
-    .then(user => {
-      const userId = user._id
-      return Promise.all(Array.from(
-        { length: restaurantNum },
-        (_, i) => Restaurant.create({ name: `restaurantList.results${i}.name`, userId })
-      ))
+  Promise.all(
+    SEED_USERS.map((user, user_index) => {
+      // 創建使用者資料(user): model.create
+      return bcrypt
+        .genSalt(10)
+        .then(salt => bcrypt.hash(user.password, salt))
+        .then(hash => User.create({
+          email: user.email,
+          password: hash
+        })).then((user) => {
+          const userRestaurant = []
+          restaurantList.results.forEach((restaurant, rest_index) => {
+            if (rest_index >= 3 * user_index && rest_index < 3 * (user_index + 1)) {
+              restaurant.userId = user._id
+              userRestaurant.push(restaurant)
+            }
+          })
+          // 對每個user建立相對應餐廳資料
+          return Restaurant.create(userRestaurant)
+        })
     })
-    .then(() => {
-      console.log('done.')
-      process.exit()
-    })
+  ).then(() => {
+    // 等待所有使用者的餐廳資料創建完成
+    console.log('所有使用者與餐廳資料創建完成')
+    process.exit()
+  }).catch(error => {
+    console.log(error)
+  })
 })
