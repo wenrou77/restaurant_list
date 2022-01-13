@@ -5,7 +5,8 @@ const Restaurant = require('../../models/restaurant')
 
 // 瀏覽全部所有餐廳
 router.get('/', (req, res) => {
-  Restaurant.find()
+  const userId = req.user._id
+  Restaurant.find({ userId })
     .lean()
     .then(restaurant => res.render('index', { restaurant }))
     .catch(error => console.error(error))
@@ -18,6 +19,7 @@ router.get('/new', (req, res) => {
 })
 ///II. 重新導向首頁
 router.post('/', (req, res) => {
+  const userId = req.user._id
   const name = req.body.name
   const category = req.body.category
   const image = req.body.image
@@ -26,7 +28,7 @@ router.post('/', (req, res) => {
   const google_map = req.body.google_map
   const rating = req.body.rating
   const description = req.body.description
-  return Restaurant.create(req.body)
+  return Restaurant.create({ userId, name, category, image, location, phone, google_map, rating, description })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
