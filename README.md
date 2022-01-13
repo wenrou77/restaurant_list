@@ -5,6 +5,8 @@
 
 This is a website created by node.js Express. 
 - Search restaurants by name or category.
+- Login to save your restaurants
+- Facebook Login allowed
 - Add a restaurant
 - Check details of a restaurant
 - Browse all restaurants
@@ -33,6 +35,9 @@ npm run seed
 ```
 npm run dev
 ```
+- Login using test account
+email: 'user1@example.com',
+password: '12345678'
 
 ## Authors
 
