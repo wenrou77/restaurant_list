@@ -35,9 +35,11 @@ npm run seed
 ```
 npm run dev
 ```
-- Login using test account
-email: 'user1@example.com',
+- Login using testing account
+```
+email: 'user1@example.com'
 password: '12345678'
+```
 
 ## Authors
 
