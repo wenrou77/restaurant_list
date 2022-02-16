@@ -8,11 +8,16 @@ router.get('/login', (req, res) => {
   res.render('login')
 })
 
-router.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/users/login',
-  failureFlash: true
-}))
+router.post('/login', (req, res) => {
+  const { email, password } = req.body
+  const errors = []
+  if (!email || !password ) {
+    errors.push({ message: 'Email和密碼欄位是必填。' })
+  }
+  if (errors.length) {
+    return res.render('login',{errors})
+  }
+})
 
 router.get('/register', (req, res) => {
   res.render('register')
