@@ -15,41 +15,22 @@ router.get('/login', (req, res) => {
 //   // failureMessage: true
 // }))
 
-router.post('/login', passport.authenticate('local', {
-      successRedirect: '/',
-      failureRedirect: '/users/login',
-      failureFlash: true
-      // failureMessage: true
-    }),
-  function (req, res) {
-    console.log(req)
+router.post('/login', 
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/users/login',
+    failureFlash: true
+    // failureMessage: true
   })
-
-// router.post('/login', (req, res) => {
-//   const { email, password } = req.body
-//   const errors = []
-//   if (!email || !password) {
-//     errors.push({ message: 'Email和密碼欄位是必填。' })
-//     return res.render('login', { errors })
-//   } 
-//   User.findOne({ email })
-//     .then(user => {
-//       if (!user) {
-//         errors.push({ message: '此Email沒有註冊過。' })
-//       }
-//       return bcrypt.compare(password, user.password).then(isMatch => {
-//         if (!isMatch) {
-//           errors.push({ message: 'Email或密碼不正確。' })
-//         }
-//         return res.render('login', { errors })
-//       })
-//     })
-//     .catch(err => done(err, false))
-  
-//   if (!errors.length) {
-//     return res.redirect('/')
-//   }
-// })
+  )
+  // function (req, res) {
+  //   const { email, password } = req.body
+  //   const errors = []
+  //   if (!email || !password) {
+  //     errors.push({ message: 'Email和密碼欄位是必填。' })
+  //     return res.render('login', { errors })
+  //   }
+  // })
 
 router.get('/register', (req, res) => {
   res.render('register')
